@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\JobData;
 use Illuminate\Http\Request;
+use App\Traits\Common;
 
 class AdminController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +24,14 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select('id','category_name')->get();
+        return view('admin.add_job',compact('categories'));
+    }
+
+    public function createcategory()
+    {
+        
+        return view('admin.add_category');
     }
 
     /**
@@ -28,7 +39,42 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title'=> 'required|string',
+            'description'=>'required|string',
+            'responsability'=> 'required|string',
+            'job_nature'=> 'required|string',
+            'location' => 'required|string',
+            'salary_from'=> 'required|numeric',
+            'salary_to'=> 'required|numeric',
+            'qualification'=> 'required|string',
+             'date_line' => 'required|date',
+             'published' => 'boolean',
+             'category_id'=> 'required|integer|exists:categories,id',
+             'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+
+        ]);
+        if($request->hasFile('image')){
+            $data['image'] = $this->uploadFile($request->image,'assets/img');
+        }
+       JobData::create($data);
+       return 'send successfully';
+
+    }
+    public function storecategory(Request $request)
+    {
+        $data = $request->validate([
+            'category_name'=> 'required|string',
+            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+  
+        ]);
+       
+        if($request->hasFile('image')){
+            $data['image'] = $this->uploadFile($request->image,'assets/img');
+        }
+       Category::create($data);
+       return 'send successfully';
+
     }
 
     /**
