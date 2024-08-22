@@ -9,6 +9,7 @@
         <!-- Header End -->
     @endsection  
     
+    
     @section('page')
         <!-- 404 Start -->
         @include('includes.error')

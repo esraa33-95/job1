@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\JobData;
 
 class PublicController extends Controller
 {
@@ -33,12 +34,22 @@ class PublicController extends Controller
     {
         return view('public.job-list');
     }
-    public function jobdetails()
+    
+    public function jobdetails(String $id)
     {
-        return view('public.job-detail');
-    }
+        $job=JobData::with(['company'])->findOrFail($id);
+        dd($job);
+        return view('public.job-detail',compact('job'));
+    }
+
+    public function jobApply(Request $request)
+    {
+    dd("send email to the admin who has created the job");
+    }
+
     public function error()
     {
         return view('public.404');
     }
+
 }
