@@ -24,7 +24,7 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Category</h2>
-        <form action="{{route('job.category1')}}" method="post" class="px-md-5" enctype="multipart/form-data">
+        <form action="{{route('jobs.store')}}" method="post" class="px-md-5" enctype="multipart/form-data">
             @csrf
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category name:</label>

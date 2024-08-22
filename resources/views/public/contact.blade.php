@@ -1,15 +1,13 @@
 @extends('public.layouts.main')
 
-@push('pageTitle')
+@push('pagetitle')
 Contact US
 @endpush
 @section('content')
         <!-- Header End -->
-        @include('public.includes.about-header')
+        @include('public.includes.header')
         <!-- Header End -->
- @endsection
  
- @section('page')
      
         <!-- Contact Start -->
         @include('public.includes.contact1')

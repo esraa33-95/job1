@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\controllers\Admin\JobController;
 use App\Http\controllers\PublicController;
+use App\Http\controllers\Admin\CategoryController;
+use App\Http\controllers\Admin\TestimonialController;
+
 
 
 Route::get('/', function () {
@@ -23,14 +27,44 @@ Route::group([
 });
 
 
-Route::group([
-    'controller'=>AdminController::class,
-    'prefix'=>'admin',
-     'as'=>'job.',
-],function(){
-    Route::get('create','create')->name('create');
-    Route::post('store','store')->name('store');
-    Route::get('category','createcategory')->name('category');
-    Route::post('category1','storecategory')->name('category1');
+//admin
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+Route::group(['prefix' =>'admin'], function(){
+    Route::group([
+        'controller'=>JobController::class,
+        'prefix'=>'jobs',
+         'as'=>'jobs.',
+         
+    ],function(){
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+    }); 
     
+    Route::group([
+        'controller'=>CategoryController::class,
+        'prefix'=>'categories',
+         'as'=>'categories.',
+    ],function(){
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+    }); 
+    Route::group([
+        'controller'=>TestimonialController::class,
+        'prefix'=>'test',
+         'as'=>'test.',
+    ],function(){
+        Route::get('create','create')->name('create');
+        Route::post('store','store')->name('store');
+    }); 
+
 });
+});
+
+
+// Admin/JobController
+// Admin/CategoryController

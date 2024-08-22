@@ -4,11 +4,9 @@
 @endpush
 @section('content')
         <!-- Header End -->
-        @include('public.includes.header-test')
+        @include('public.includes.header')
         <!-- Header End -->
- @endsection
- 
- @section('page')
+
         <!-- Testimonial Start -->
         @include('public.includes.test')
         <!-- Testimonial End -->

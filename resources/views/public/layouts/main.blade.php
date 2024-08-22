@@ -14,7 +14,7 @@
         <!-- Navbar End -->
 
 @yield('content')
-@yield('page')
+
 
 
 <!-- Footer Start -->

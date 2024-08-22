@@ -4,11 +4,9 @@
 @endpush
 @section('content')
         <!-- Header End -->
-        @include('public.includes.header-jobdetail')
+        @include('public.includes.header')
         <!-- Header End -->
- @endsection
-
- @section('page')
+ 
         <!-- Job Detail Start -->
        @include('public.includes.job-details')
         <!-- Job Detail End -->
