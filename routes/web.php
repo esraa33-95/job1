@@ -2,10 +2,10 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\controllers\Admin\JobController;
-use App\Http\controllers\PublicController;
-use App\Http\controllers\Admin\CategoryController;
-use App\Http\controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\JobController; 
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TestimonialController;
 
 
 

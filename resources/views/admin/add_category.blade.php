@@ -29,7 +29,10 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Category name:</label>
             <div class="col-md-10">
-              <input type="text" placeholder="" class="form-control py-2" name="category_name" />
+              <input type="text" placeholder="" class="form-control py-2" name="category_name" value="{{old('category_name')}}" />
+              @error('category_name')
+                  <div class="alert alert-warning">{{$message}}</div>
+              @enderror
             </div>
           </div>
           <hr>

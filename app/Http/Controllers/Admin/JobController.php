@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\JobData;
 use App\Traits\Common;
+use Illuminate\Validation\Rules\GreaterThan;
 
 class JobController extends Controller
 {
@@ -41,7 +42,7 @@ class JobController extends Controller
             'job_nature'=> 'required|string',
             'location' => 'required|string',
             'salary_from'=> 'required|numeric',
-            'salary_to'=> 'required|numeric',
+             'salary_to'=> 'required|numeric',
             'qualification'=> 'required|string',
              'date_line' => 'required|date',
              'published' => 'boolean',
@@ -49,6 +50,7 @@ class JobController extends Controller
              'image' =>'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
+        
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
