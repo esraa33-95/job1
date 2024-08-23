@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use App\Traits\Common;
 
 class TestimonialController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+       
+
     }
 
     /**
@@ -20,7 +24,9 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('admin.add_testimonial');
+        
     }
 
     /**
@@ -28,7 +34,19 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data=$request->validate([
+            'title'=>'required|string',
+            'comment'=>'required|string',
+            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+            'published' => 'boolean',
+            'profession' => 'required|string',
+
+        ]);
+        if($request->hasFile('image')){
+            $data['image'] = $this->uploadFile($request->image,'assets/img');
+        }
+        Testimonial::create($data);
+        return 'success';
     }
 
     /**

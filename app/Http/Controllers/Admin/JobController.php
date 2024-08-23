@@ -16,7 +16,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = JobData::with('category')->get();
+        return view('admin.jobs',compact('jobs'));
     }
 
     /**
@@ -60,7 +61,8 @@ class JobController extends Controller
      */
     public function show(string $id)
     {
-        
+        $job = JobData::with('category')->findOrFail($id);
+        return view('admin.jobs_details',compact('job'));
     }
 
     /**
@@ -68,7 +70,7 @@ class JobController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -76,7 +78,7 @@ class JobController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**

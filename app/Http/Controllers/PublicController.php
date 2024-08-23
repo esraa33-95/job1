@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Testimonial;
 
 
 class PublicController extends Controller
 {
     public function index()
     {
+
         return view('public.index');
     }
     public function about()
@@ -28,7 +30,8 @@ class PublicController extends Controller
     }
     public function testimonial()
     {
-        return view('public.testimonial');
+        $testimonials = Testimonial::where('published', 1)->get();
+        return view('public.testimonial',compact('testimonials'));
     }
     public function joblist()
     {
@@ -38,8 +41,5 @@ class PublicController extends Controller
     {
         return view('public.job-detail');
     }
-    public function error()
-    {
-        return view('public.404');
-    }
+    
 }
