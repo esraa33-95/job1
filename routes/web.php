@@ -29,11 +29,11 @@ Route::group([
 
 
 //admin
-// Route::group(
-//     [
-//         'prefix' => LaravelLocalization::setLocale(),
-//         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-//     ], function(){
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
 
 Route::group(['prefix' =>'admin'], function(){
     Route::group([
@@ -46,6 +46,10 @@ Route::group(['prefix' =>'admin'], function(){
         Route::post('store','store')->name('store');
         Route::get('index','index')->name('index');
         Route::get('{id}/show','show')->name('show');
+        Route::get('{id}/edit','edit')->name('edit');
+        Route::put('{id}/update','update')->name('update');
+        Route::delete('{id}/delete','destroy')->name('delete');
+        Route::delete('{id}/restore','restore')->name('restore');
     }); 
     
     Route::group([
@@ -55,6 +59,9 @@ Route::group(['prefix' =>'admin'], function(){
     ],function(){
         Route::get('create','create')->name('create');
         Route::post('store','store')->name('store');
+        Route::get('index','index')->name('index');
+        Route::get('{id}/edit','edit')->name('edit');
+        Route::put('{id}/update','update')->name('update');
     }); 
     Route::group([
         'controller'=>TestimonialController::class,
@@ -67,7 +74,7 @@ Route::group(['prefix' =>'admin'], function(){
     }); 
 
 });
-// });
+ });
 
 
 // Admin/JobController

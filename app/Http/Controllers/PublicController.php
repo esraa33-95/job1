@@ -30,8 +30,8 @@ class PublicController extends Controller
     }
     public function testimonial()
     {
-        $testimonials = Testimonial::where('published', 1)->get();
-        return view('public.testimonial',compact('testimonials'));
+        // $testimonials = Testimonial::where('published', 1)->get();
+         return view('public.testimonial');
     }
     public function joblist()
     {

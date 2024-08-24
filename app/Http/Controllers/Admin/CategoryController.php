@@ -16,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        return view('admin.categories',compact('categories'));
     }
 
     /**
@@ -24,6 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+
         return view('admin.add_category');
     }
 
@@ -42,7 +44,7 @@ class CategoryController extends Controller
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
        Category::create($data);
-       return 'send successfully';
+       return redirect()->route('categories.index');
     }
 
     /**
@@ -58,7 +60,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::findOrfail($id);
+        return view('admin.edit_category',compact('category'));
     }
 
     /**
@@ -66,7 +69,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $data = $request->validate([
+        'category_name'=>'required|string',
+        'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
+
+       ]);
+       if($request->hasFile('image')){
+        $data['image'] = $this->uploadFile($request->image,'assets/img');
+    }
+        Category::where('id',$id)->update($data);
+        return redirect()->route('categories.index');
+
     }
 
     /**

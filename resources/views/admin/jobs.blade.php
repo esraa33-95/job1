@@ -40,6 +40,9 @@
               <th scope="col">categoryname</th>
               <th scope="col">image</th>
               <th scope="col">show</th>
+              <th scope="col">edit</th>
+              <th scope="col">delete</th>
+             
               
             </tr>
           </thead>
@@ -59,6 +62,17 @@
               <td>{{$job->category->category_name}}</td>
               <td><img src="{{asset('assets/img'.'/'.$job->image)}}"></td>
               <td><a href="{{route('jobs.show',$job->id)}}">show</a></td>
+              <td><a href="{{route('jobs.edit',$job->id)}}">edit</a></td>
+              <td>
+                <form action="{{ route('jobs.delete', $job['id'])}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <input type="submit" value="delete">
+                 </form>
+            
+              </td>
+
+              
              
             </tr>
 
