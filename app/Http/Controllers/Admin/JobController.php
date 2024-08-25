@@ -19,6 +19,7 @@ class JobController extends Controller
     public function index()
     {
         $jobs = JobData::with('category')->get();
+        // dd($jobs);
         return view('admin.jobs',compact('jobs'));
     }
 
@@ -55,7 +56,9 @@ class JobController extends Controller
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
+
        JobData::create($data);
+       
        return redirect()->route('jobs.index');
     }
 

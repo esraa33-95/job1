@@ -28,17 +28,11 @@
           <thead>
             <tr class="table-dark">
               <th scope="col">title</th>
-              <th scope="col">responsability</th>
-              <th scope="col">description</th>
               <th scope="col">jobnature</th>
               <th scope="col">location</th>
-              <th scope="col">salaryfrom</th>
-              <th scope="col">salaryto</th>
-              <th scope="col">qualification</th>
               <th scope="col">dateline</th> 
               <th scope="col">Published</th>
               <th scope="col">categoryname</th>
-              <th scope="col">image</th>
               <th scope="col">show</th>
               <th scope="col">edit</th>
               <th scope="col">delete</th>
@@ -50,24 +44,18 @@
             @foreach($jobs as $job )
             <tr>
               <td scope="row">{{$job['title']}}</td>
-              <td scope="row">{{$job['responsability']}}</td>
-              <td>{{Str::limit($job['description'], 7, ',,,')}}</td>
               <td scope="row">{{$job['job_nature']}}</td>
-              <td scope="row">{{Str::limit($job['location'],7,'...')}}</td>
-              <td scope="row">{{$job['salary_from']}}</td>
-              <td scope="row">{{$job['salary_to']}}</td>
-              <td scope="row">{{$job['qualification']}}</td>
+              <td scope="row">{{$job['location']}}</td>
               <td scope="row">{{$job['date_line']}}</td>
               <td>{{($job['published'] == 1) ? "yes" : "no"}}</td>
               <td>{{$job->category->category_name}}</td>
-              <td><img src="{{asset('assets/img'.'/'.$job->image)}}"></td>
               <td><a href="{{route('jobs.show',$job->id)}}">show</a></td>
               <td><a href="{{route('jobs.edit',$job->id)}}">edit</a></td>
               <td>
                 <form action="{{ route('jobs.delete', $job['id'])}}" method="post">
                   @csrf
                   @method('DELETE')
-                  <input type="submit" value="delete">
+                  <input type="submit" value="delete" class="btn btn-link mb-1 p-0 border-0">
                  </form>
             
               </td>

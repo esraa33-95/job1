@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Traits\Common;
 use App\Models\Category;
-use App\Models\JobData;
+use App\Traits\Common;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -17,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::get();
-        return view('admin.categories',compact('categories'));
+        return view('admin.categories', compact('categories'));
     }
 
     /**
@@ -35,16 +34,18 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category_name'=> 'required|string',
-            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
-  
+            'category_name' => 'required|string',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+
         ]);
-       
-        if($request->hasFile('image')){
-            $data['image'] = $this->uploadFile($request->image,'assets/img');
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/img');
         }
-       Category::create($data);
-       return redirect()->route('categories.index');
+
+        Category::create($data);
+        
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -61,7 +62,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = Category::findOrfail($id);
-        return view('admin.edit_category',compact('category'));
+        return view('admin.edit_category', compact('category'));
     }
 
     /**
@@ -69,15 +70,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       $data = $request->validate([
-        'category_name'=>'required|string',
-        'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
+        $data = $request->validate([
+            'category_name' => 'required|string',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
 
-       ]);
-       if($request->hasFile('image')){
-        $data['image'] = $this->uploadFile($request->image,'assets/img');
-    }
-        Category::where('id',$id)->update($data);
+        ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/img');
+        }
+        Category::where('id', $id)->update($data);
         return redirect()->route('categories.index');
 
     }
