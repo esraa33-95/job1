@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\JobController; 
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 
@@ -44,7 +45,7 @@ Route::group(['prefix' =>'admin'], function(){
     ],function(){
         Route::get('create','create')->name('create');
         Route::post('store','store')->name('store');
-        Route::get('index','index')->name('index');
+        Route::get('index','index')->name('index')->middleware('verified');
         Route::get('{id}/show','show')->name('show');
         Route::get('{id}/edit','edit')->name('edit');
         Route::put('{id}/update','update')->name('update');
@@ -79,3 +80,11 @@ Route::group(['prefix' =>'admin'], function(){
 
 // Admin/JobController
 // Admin/CategoryController
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('contactus', [ContactController::class, 'index'])->name('contact.index');
+Route::post('contactus', [ContactController::class, 'send'])->name('contact.send');
