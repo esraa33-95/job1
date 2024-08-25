@@ -7,21 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\JobData;
 use App\Traits\Common;
-
-
+use Illuminate\Validation\Rules\GreaterThan;
 
 class JobController extends Controller
-{   
+{
     use Common;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $jobs = JobData::with('category')->get();
-        // dd($jobs);
-        return view('admin.jobs',compact('jobs'));
+        JobData::get();
+        $jobs=JobData::with('category')->get();
+        return view ('admin.jobs',compact('jobs'));
     }
+ 
 
     /**
      * Show the form for creating a new resource.
@@ -44,21 +44,19 @@ class JobController extends Controller
             'job_nature'=> 'required|string',
             'location' => 'required|string',
             'salary_from'=> 'required|numeric',
-             'salary_to'=> 'required|numeric|gt:salary_from',
+             'salary_to'=> 'required|numeric',
             'qualification'=> 'required|string',
              'date_line' => 'required|date',
-             'published' => 'boolean',
              'category_id'=> 'required|integer|exists:categories,id',
              'image' =>'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
-        
+        $data['published']=isset($request->published);
         if($request->hasFile('image')){
-            $data['image'] = $this->uploadFile($request->image,'assets/img');
+        $data['image'] = $this->uploadFile($request->image,'assets/img');
         }
 
        JobData::create($data);
-       
        return redirect()->route('jobs.index');
     }
 
@@ -67,8 +65,8 @@ class JobController extends Controller
      */
     public function show(string $id)
     {
-        $job = JobData::with('category')->findOrFail($id);
-        return view('admin.jobs_details',compact('job'));
+        $jobs = JobData::with('category')->findOrFail($id);
+        return view('admin.jobs_details',compact('jobs'));
     }
 
     /**
@@ -76,17 +74,17 @@ class JobController extends Controller
      */
     public function edit(string $id)
     {
-        $job = JobData::findOrfail($id);
-        $categories = Category::select('id','category_name')->get();
-        return view('admin.edit_jobs',compact('job','categories'));
-
+        $job = JobData::with('category')->findOrFail($id);
+        $categories = Category::all();
+        return view('admin.edit_job',compact('job','categories'));
     }
-
+   
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
+       // dd($request,$id);
         $data = $request->validate([
             'title'=> 'required|string',
             'description'=>'required|string',
@@ -97,28 +95,26 @@ class JobController extends Controller
              'salary_to'=> 'required|numeric',
             'qualification'=> 'required|string',
              'date_line' => 'required|date',
-             'published' => 'boolean',
-             'category_id'=> 'required|integer|exists:categories,id',
+             'category_id'=> 'sometimes|integer|exists:categories,id',
              'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
 
         ]);
-        
+       
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/img');
-        }
-       JobData::where('id',$id)->update($data);
-       return redirect()->route('jobs.index');
+        } 
+        $data['published']=isset($request->published);
+                JobData::where('id',$id)->update($data);
+                return redirect()->route('jobs.index');
+               // dd($data);
     }
+  
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy(string $id)
     {
-      $id = $request->id;
-      JobData::where('id',$id)->delete($id);
-      return redirect()->route('jobs.index');
-        
+        //
     }
-    
 }

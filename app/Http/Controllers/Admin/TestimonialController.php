@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobData;
 use App\Models\Testimonial;
-use Illuminate\Http\Request;
 use App\Traits\Common;
+use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {
@@ -15,7 +16,6 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-       
 
     }
 
@@ -24,9 +24,9 @@ class TestimonialController extends Controller
      */
     public function create()
     {
-        
+
         return view('admin.add_testimonial');
-        
+
     }
 
     /**
@@ -34,16 +34,16 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request->validate([
-            'title'=>'required|string',
-            'comment'=>'required|string',
-            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+        $data = $request->validate([
+            'title' => 'required|string',
+            'comment' => 'required|string',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'published' => 'boolean',
             'profession' => 'required|string',
 
         ]);
-        if($request->hasFile('image')){
-            $data['image'] = $this->uploadFile($request->image,'assets/img');
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/img');
         }
         Testimonial::create($data);
         return 'success';
@@ -54,7 +54,9 @@ class TestimonialController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $job = JobData::with('category')->findOrFail($id);
+        // dd($job)
+        return view('admin.job_details', compact('job'));
     }
 
     /**
