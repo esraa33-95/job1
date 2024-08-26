@@ -33,6 +33,7 @@
               <th scope="col">dateline</th> 
               <th scope="col">Published</th>
               <th scope="col">categoryname</th>
+              
               <th scope="col">show</th>
               <th scope="col">edit</th>
               <th scope="col">delete</th>
@@ -49,6 +50,7 @@
               <td scope="row">{{$job['date_line']}}</td>
               <td>{{($job['published'] == 1) ? "yes" : "no"}}</td>
               <td>{{$job->category->category_name}}</td>
+              
               <td><a href="{{route('jobs.show',$job->id)}}">show</a></td>
               <td><a href="{{route('jobs.edit',$job->id)}}">edit</a></td>
               <td>

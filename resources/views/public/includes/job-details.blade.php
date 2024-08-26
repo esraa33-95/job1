@@ -75,7 +75,7 @@
                 </div>
                 <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
                     <h4 class="mb-4">Company Detail</h4>
-                    <p class="m-0">{{$job->company?->description}}.</p>
+                    <p class="m-0">{{$job->company?->description}}</p>
                 </div>
             </div>
         </div>

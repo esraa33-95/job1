@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\JobData;
 use App\Traits\Common;
 
@@ -28,8 +29,9 @@ class JobController extends Controller
      */
     public function create()
     {
+        $companies = Company::select('id','title')->get();
         $categories = Category::select('id','category_name')->get();
-        return view('admin.add_job',compact('categories'));
+        return view('admin.add_job',compact('categories','companies'));
     }
 
     /**
@@ -49,6 +51,7 @@ class JobController extends Controller
              'date_line' => 'required|date',
              'published' => 'boolean',
              'category_id'=> 'required|integer|exists:categories,id',
+             'company_id'=> 'required|integer|exists:companies,id',
              'image' =>'required|mimes:png,jpg,jpeg|max:2048',
 
         ]);
@@ -78,7 +81,8 @@ class JobController extends Controller
     {
         $job = JobData::findOrfail($id);
         $categories = Category::select('id','category_name')->get();
-        return view('admin.edit_jobs',compact('job','categories'));
+        $companies = Company::select('id','title')->get();
+        return view('admin.edit_jobs',compact('job','categories','companies'));
 
     }
 
@@ -99,6 +103,7 @@ class JobController extends Controller
              'date_line' => 'required|date',
              'published' => 'boolean',
              'category_id'=> 'required|integer|exists:categories,id',
+             'company_id'=> 'required|integer|exists:companies,id',
              'image' =>'sometimes|mimes:png,jpg,jpeg|max:2048',
 
         ]);

@@ -11,8 +11,10 @@ class PublicController extends Controller
 {
     public function index()
     {
-
-        return view('public.index');
+        $jobs = JobData::where('published', 1)->get();
+        $categories = Category::get();
+        $testimonials = Testimonial::where('published', 1)->get();
+        return view('public.index',compact('testimonials','jobs','categories'));
     }
 
     public function about()
@@ -22,7 +24,7 @@ class PublicController extends Controller
 
     public function contact()
     {
-        // create
+        
         return view('public.contact');
     }
 
@@ -34,19 +36,20 @@ class PublicController extends Controller
 
     public function testimonial()
     {
-        // $testimonials = Testimonial::where('published', 1)->get();
-        return view('public.testimonial');
+        $testimonials = Testimonial::where('published', 1)->get();
+        return view('public.testimonial',compact('testimonials'));
     }
 
     public function joblist()
     {
-        return view('public.job-list');
+        $jobs = JobData::where('published', 1)->get();
+        return view('public.job-list',compact('jobs'));
     }
 
     public function jobdetails(String $id)
     {
-        $job = JobData::findOrFail($id);
-        // dd($job);
+        $job = JobData::with('company')->findOrFail($id);
+        //dd($job);
         return view('public.job-detail', compact('job'));
     }
 
@@ -54,5 +57,6 @@ class PublicController extends Controller
     {
         dd("send email to the admin who has created the job");
     }
+    
 
 }

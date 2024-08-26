@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Company extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name',
-         'message',
-         'email',
-         'subject',
-
+        'title',
+        'description',
+        
     ];
+    public function job()
+    {
+        return $this->hasMany(JobData::class);
+    }
+    
 }

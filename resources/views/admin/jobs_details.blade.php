@@ -88,6 +88,7 @@
                                     <span class="fw-bold">category name:</span> {{ $job->category->category_name }}
                                 </p>
                             </div>
+                            
 
                             <div class="text-md-end">
                                 <a href="{{ route('jobs.index') }}"

@@ -3,19 +3,22 @@
         <h1 class="text-center mb-5">Our Clients Say!!!</h1>
 
         <div class="owl-carousel testimonial-carousel">
+            @foreach ($testimonials as $test)
+                
+            
             <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                <p>{{$test->comment}}</p>
                 <div class="d-flex align-items-center">
-                    <img class="img-fluid flex-shrink-0 rounded" src="{{asset('assets/img/testimonial-1.jpg')}}" style="width: 50px; height: 50px;">
+                    <img class="img-fluid flex-shrink-0 rounded" src="{{asset('assets/img/'.$test->image)}}" style="width: 50px; height: 50px;">
                     <div class="ps-3">
-                        <h5 class="mb-1">Client Name</h5>
-                        <small>Profession</small>
+                        <h5 class="mb-1">{{$test->title}}</h5>
+                        <small>{{$test->profession}}</small>
                     </div>
                 </div>
             </div>
-
-            <div class="testimonial-item bg-light rounded p-4">
+            @endforeach
+            {{-- <div class="testimonial-item bg-light rounded p-4">
                 <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
                 <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
                 <div class="d-flex align-items-center">
@@ -47,7 +50,7 @@
                         <small>Profession</small>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

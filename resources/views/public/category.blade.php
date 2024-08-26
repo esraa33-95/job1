@@ -9,7 +9,7 @@ category
 
 
         <!-- Category Start -->
-        @include('public.includes.category1')
+        @include('public.includes.category')
         <!-- Category End -->
  @endsection
 

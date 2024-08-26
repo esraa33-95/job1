@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\PublicController;
@@ -22,6 +23,7 @@ Route::group([
     Route::get('job-list', 'joblist')->name('joblist');
     Route::get('job-details/{id}', 'jobdetails')->name('jobdetails');
     Route::post('job-apply', 'jobApply')->name('apply_job');
+    
 });
 
 //admin
@@ -68,9 +70,18 @@ Route::group(
                 Route::get('create', 'create')->name('create');
                 Route::post('store', 'store')->name('store');
             });
+            Route::group([
+                'controller' => CompanyController::class,
+                'prefix' => 'company',
+                'as' => 'company.',
+            ], function () {
+                Route::get('create', 'create')->name('create');
+                Route::post('store', 'store')->name('store');
+            });
+
         });
-    }
-);
+    });
+
 
 
 
@@ -79,5 +90,6 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('contactus', [ContactController::class, 'index'])->name('contact.index');
+Route::get('contactus', [PublicController::class, 'contact'])->name('contact.index');
 Route::post('contactus', [ContactController::class, 'send'])->name('contact.send');
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');

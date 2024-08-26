@@ -160,6 +160,33 @@
 
                         </div>
                     </div>
+                    <hr>
+
+                    <div class="form-group mb-3 row">
+                        <label for=""
+                            class="form-label col-md-2 fw-bold text-md-end">company name</label>
+
+                        <div class="col-md-10">
+                            <select name="company_id" id="" class="form-control">
+                                @error('company_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                <option value="">Select company</option>
+
+                                @foreach ($companies as $company)
+                                    <option value="{{ $company->id }}"@selected(old('company_id',$job->company_id) == $company->id)>
+                                        {{ $company->title }}</option>
+                                @endforeach
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+
 
                     <hr>
                     <div class="form-group mb-3 row">
