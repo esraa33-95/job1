@@ -93,3 +93,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('contactus', [PublicController::class, 'contact'])->name('contact.index');
 Route::post('contactus', [ContactController::class, 'send'])->name('contact.send');
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+
+
+Route::get('jobs', [PublicController::class, 'jobs'])->name('jobs');

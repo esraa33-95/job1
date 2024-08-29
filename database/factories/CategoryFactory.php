@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_name'=>fake()->randomElement(['zahra','sultan']),
+            'category_name'=>fake()->unique()->randomElement(['zahran','sultan','warda']),
             'image'=>basename(fake()->image(public_path('assets/img'))),
         ];
     }

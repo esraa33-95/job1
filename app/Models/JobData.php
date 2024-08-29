@@ -23,15 +23,12 @@ class JobData extends Model
         'date_line',
         'published',
         'category_id',
-        'company_id',
+        
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function company()
-    {
-        return $this->hasMany(Company::class);
-    }
+   
 }

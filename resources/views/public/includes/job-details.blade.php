@@ -1,6 +1,7 @@
 <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="row gy-5 gx-4">
+            
             <div class="col-lg-8">
                 <div class="d-flex align-items-center mb-5">
                     <img class="flex-shrink-0 img-fluid border rounded" src="{{asset('assets/img/com-logo-2.jpg')}}" alt="" style="width: 80px; height: 80px;">
@@ -14,9 +15,9 @@
 
                 <div class="mb-5">
                     <h4 class="mb-3">Job description</h4>
-                    <p>{{$job->description}}.</p>
+                    <p>{{$job->description}}</p>
                     <h4 class="mb-3">Responsibility</h4>
-                    <p>{{$job->responsability}}r</p>
+                    <p>{{$job->responsability}}</p>
                     {{-- <ul class="list-unstyled">
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
                         <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
@@ -37,7 +38,7 @@
 
                 <div class="">
                     <h4 class="mb-4">Apply For The Job</h4>
-                    <form method="POST" action="{{route('apply_job')}}" enctype="multipart/form-data">
+                    <form method="POST" action="" enctype="multipart/form-data">
                         @csrf
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
@@ -75,7 +76,7 @@
                 </div>
                 <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
                     <h4 class="mb-4">Company Detail</h4>
-                    <p class="m-0">{{$job->company?->description}}</p>
+                    <p class="m-0">{{$job->description}}</p>
                 </div>
             </div>
         </div>

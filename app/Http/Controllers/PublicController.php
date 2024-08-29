@@ -46,11 +46,10 @@ class PublicController extends Controller
         return view('public.job-list',compact('jobs'));
     }
 
-    public function jobdetails(String $id)
+    public function jobdetails(string $id)
     {
-        $job = JobData::with('company')->findOrFail($id);
-        //dd($job);
-        return view('public.job-detail', compact('job'));
+        $job = JobData::findOrfail($id);
+        return view('public.job-detail',compact('job'));
     }
 
     public function jobApply(Request $request)
@@ -58,5 +57,11 @@ class PublicController extends Controller
         dd("send email to the admin who has created the job");
     }
     
+    public function jobs()
+    {
+        $categories = Category::with(['jobs' => function ($query) { $query->where('published', 1)->take(3);}])->limit(4)->get();
+        //dd($categories);
+        return view('public.jobs',compact('categories'));
+    }
 
 }

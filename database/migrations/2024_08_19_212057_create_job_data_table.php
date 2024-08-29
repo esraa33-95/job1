@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('date_line');
             $table->boolean('published');
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('company_id')->constrained('companies');
+            
             $table->softDeletes();
             $table->timestamps();
         });

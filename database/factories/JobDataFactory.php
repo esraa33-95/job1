@@ -28,8 +28,8 @@ class JobDataFactory extends Factory
         'qualification'=>fake()->text(),
         'date_line'=>fake()->date(),
         'published'=>fake()->boolean(),
-        'category_id'=>fake()->numberBetween(1,5),
-        'company_id'=>fake()->numberBetween(1,5),
+        'category_id'=>fake()->numberBetween(1,3),
+        
         ];
     }
 }
