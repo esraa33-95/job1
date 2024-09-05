@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 
 
+
 class PublicController extends Controller
 {
     public function index()
