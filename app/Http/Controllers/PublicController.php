@@ -8,6 +8,7 @@ use App\Models\Category;
 
 class PublicController extends Controller
 {
+    
     public function index()
     {
         return view('public.index');
